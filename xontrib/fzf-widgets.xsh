@@ -2,7 +2,7 @@ import os
 import re
 import subprocess
 from xonsh.history.main import history_main
-from xonsh.completers.path import complete_path
+from xonsh.completers.path import _complete_path_raw
 from prompt_toolkit.keys import Keys
 
 __all__ = ()
@@ -63,7 +63,7 @@ def fzf_insert_file(event, dirs_only=False):
     cwd = None
     path = ''
     if prefix:
-        paths = complete_path(os.path.normpath(prefix), before_cursor, 0, len(before_cursor), None)[0]
+        paths = _complete_path_raw(os.path.normpath(prefix), before_cursor, 0, len(before_cursor), None)[0]
         if len(paths) == 1:
             path = paths.pop()
             expanded_path = os.path.expanduser(path)
